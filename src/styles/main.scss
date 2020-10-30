@@ -1,0 +1,14 @@
+// load sass var func mixins and ...
+@import "./utils/index.scss";
+// load vendors like bootstrap tailwind and ...
+@import "./vendors/index.scss";
+// load base and global style
+@import "./base/index.scss";
+// load atomic components
+@import "./atoms/index.scss";
+// load molecular components
+@import "./molecules/index.scss";
+// load polymeric components (pages)
+@import "./polymers/index.scss";
+// load themes settings
+@import "./themes/index.scss"
