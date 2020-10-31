@@ -9,8 +9,12 @@ import { FeedItemInterface } from "../../graphql/interface";
 const FeedItem: React.FC<FeedItemInterface> = ({ description, url, id }) => {
   return (
     <ListGroupItem className="feedItems" key={id} tag="a" href={url}>
-      <ListGroupItemHeading className="text-primary">{url}</ListGroupItemHeading>
-      <ListGroupItemText className="text-muted">{description}</ListGroupItemText>
+      <ListGroupItemHeading className="text-primary">
+        {url}
+      </ListGroupItemHeading>
+      <ListGroupItemText className="text-muted">
+        {description}
+      </ListGroupItemText>
     </ListGroupItem>
   );
 };

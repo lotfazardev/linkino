@@ -1,30 +1,12 @@
 import React from "react";
 import { ListGroup } from "reactstrap";
-import { FeedItemInterface } from "../../graphql/interface";
+import { FeedArrayInterface } from "../../graphql/interface";
 import FeedItem from "./FeedItem";
 
-const FeedUnorderedList = () => {
-  const testArray: FeedItemInterface[] = [
-    {
-      id: "ckgwgddb3g5gp0977jexzotan",
-      description: "this is simple test 1",
-      url: "https://google.com",
-    },
-    {
-      id: "ckgwgddb3g5asdd77jexzotan",
-      description: "this is simple test 2",
-      url: "https://yahoo.com",
-    },
-    {
-      id: "ckgwgddb3g5gd3577jexzotan",
-      description: "this is simple test 2",
-      url: "https://bing.com",
-    },
-  ];
-  
+const FeedUnorderedList: React.FC<FeedArrayInterface> = ({ links }) => {
   return (
     <ListGroup className="p-5" flush>
-      {testArray.map((item) => {
+      {links.map((item) => {
         return (
           <FeedItem
             key={item.id}
