@@ -1,5 +1,5 @@
 export interface FeedItemInterface {
-  id: number;
+  id: string;
   description: string;
   url: string;
 };
