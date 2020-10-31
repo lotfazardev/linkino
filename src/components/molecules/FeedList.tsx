@@ -3,10 +3,11 @@ import React from "react";
 import { FEED_QUERY } from "../../graphql/query";
 import FeedUnorderedList from "../atoms/FeedUnorderedList";
 import { GetFeedArrayInterface } from "../../graphql/interface";
+import LoadingPage from "../atoms/LoadingPage";
 
 const FeedList = () => {
   const { loading, error, data } = useQuery<GetFeedArrayInterface>(FEED_QUERY);
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <LoadingPage />;
   if (error) return <div>Error! ${error.message}</div>;
   return data ? <FeedUnorderedList links={data.feed.links} /> : null;
 };
