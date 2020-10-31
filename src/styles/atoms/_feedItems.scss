@@ -1,0 +1,6 @@
+.feedItems{
+    border-radius: $default;
+    &:hover{
+        background-color: $feedItemsBackgroundColor;
+    }
+}
