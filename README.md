@@ -5,7 +5,7 @@
 ### 1. Clone repository
 
 ```sh
-git clone https://github.com/howtographql/react-apollo/
+git clone https://github.com/lotfazardev/linkino.git
 ```
 
 ### 2. Install dependencies & Deploy the Prisma database API
@@ -17,7 +17,7 @@ yarn global add prisma
 
 Also, run the following commands:
 ```sh
-cd react-apollo/server
+cd linkino/server
 yarn install
 prisma deploy
 ```
