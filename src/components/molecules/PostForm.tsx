@@ -3,6 +3,7 @@ import { useMutation } from "react-apollo";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { POST_MUTATION } from "../../graphql/mutation";
 import ErrorBox from "../atoms/ErrorBox";
+import SucsessBox from "../atoms/SucsessBox";
 
 const PostForm = () => {
   const [Link, setLink] = useState("");
@@ -37,7 +38,7 @@ const PostForm = () => {
 
   return (
     <div className="p-5">
-      {data ? <p>Saved!</p> : null}
+      {data ? <SucsessBox message="Saved !"/> : null}
       {IsError && error ? (
         <ErrorBox errorText={error.message} />
       ) : (
