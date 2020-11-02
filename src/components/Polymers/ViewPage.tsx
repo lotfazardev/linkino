@@ -1,7 +1,7 @@
 import React from "react";
 import FeedList from "../molecules/FeedList";
 
-const IndexPage = () => {
+const ViewPage = () => {
   return (
     <div>
       <FeedList />
@@ -9,4 +9,4 @@ const IndexPage = () => {
   );
 };
 
-export default IndexPage;
+export default ViewPage;
