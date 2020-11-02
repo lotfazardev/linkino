@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import PostForm from "./molecules/PostForm";
 import TopNavbar from "./molecules/TopNavbar";
+import HomePage from "./Polymers/HomePage";
 import IndexPage from "./Polymers/IndexPage";
 
 const App = () => {
@@ -10,7 +11,7 @@ const App = () => {
       <TopNavbar />
       <Switch>
         <Route exact path="/">
-          <p>homePage</p>
+          <HomePage />
         </Route>
         <Route exact path="/View">
           <IndexPage />
