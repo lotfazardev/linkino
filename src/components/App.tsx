@@ -1,13 +1,34 @@
 import React from "react";
+import { Route, Switch } from "react-router-dom";
+import PostForm from "./molecules/PostForm";
 import TopNavbar from "./molecules/TopNavbar";
 import IndexPage from "./Polymers/IndexPage";
 
 const App = () => {
   return (
-    <div>
-      <TopNavbar/>
-      <IndexPage />
-    </div>
+    <>
+      <TopNavbar />
+      <Switch>
+        <Route exact path="/">
+          <p>homePage</p>
+        </Route>
+        <Route exact path="/View">
+          <IndexPage />
+        </Route>
+        <Route exact path="/Add">
+          <PostForm />
+        </Route>
+        <Route exact path="/Signup">
+          <p>SignupPage</p>
+        </Route>
+        <Route exact path="/Login">
+          <p>LoginPage</p>
+        </Route>
+        <Route path="/">
+          <p>404</p>
+        </Route>
+      </Switch>
+    </>
   );
 };
 

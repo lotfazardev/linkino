@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   Collapse,
   Nav,
@@ -19,22 +20,32 @@ const TopNavbar = () => {
   return (
     <div>
       <Navbar color="warning" light expand="md">
-        <NavbarBrand href="/">Linkino</NavbarBrand>
+        <Link to="/">
+          <NavbarBrand>Linkino</NavbarBrand>
+        </Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <NavLink href="/View">View Link</NavLink>
+              <Link to="/View">
+                <NavLink>View Link</NavLink>
+              </Link>
             </NavItem>
             <NavItem>
-              <NavLink href="/Add">Add Link</NavLink>
+              <Link to="/Add">
+                <NavLink>Add Link</NavLink>
+              </Link>
             </NavItem>
           </Nav>
           <NavbarText>
-            <NavLink href="/Add">Login</NavLink>
+            <Link to="/Login">
+              <NavLink>Login</NavLink>
+            </Link>
           </NavbarText>
           <NavbarText>
-            <NavLink href="/Add">Sign up</NavLink>
+            <Link to="/Signup">
+              <NavLink>Sign up</NavLink>
+            </Link>
           </NavbarText>
         </Collapse>
       </Navbar>
