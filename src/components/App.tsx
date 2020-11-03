@@ -4,6 +4,8 @@ import AuthEntery from "./molecules/AuthEntery";
 import PostForm from "./molecules/PostForm";
 import TopNavbar from "./molecules/TopNavbar";
 import HomePage from "./Polymers/HomePage";
+import LoginPage from "./Polymers/LoginPage";
+import SignupPage from "./Polymers/SignupPage";
 import ViewPage from "./Polymers/ViewPage";
 
 const App = () => {
@@ -21,10 +23,10 @@ const App = () => {
           <PostForm />
         </Route>
         <Route exact path="/Signup">
-          <AuthEntery isLogin={false} />
+          <SignupPage />
         </Route>
         <Route exact path="/Login">
-          <AuthEntery isLogin={true} />
+          <LoginPage />
         </Route>
         <Route path="/">
           <p>404</p>
