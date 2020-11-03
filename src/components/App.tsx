@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import AuthEntery from "./molecules/AuthEntery";
 import PostForm from "./molecules/PostForm";
 import TopNavbar from "./molecules/TopNavbar";
 import HomePage from "./Polymers/HomePage";
@@ -20,10 +21,10 @@ const App = () => {
           <PostForm />
         </Route>
         <Route exact path="/Signup">
-          <p>SignupPage</p>
+          <AuthEntery isLogin={false} />
         </Route>
         <Route exact path="/Login">
-          <p>LoginPage</p>
+          <AuthEntery isLogin={true} />
         </Route>
         <Route path="/">
           <p>404</p>
