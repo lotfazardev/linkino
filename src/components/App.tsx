@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import AuthEntery from "./molecules/AuthEntery";
 import PostForm from "./molecules/PostForm";
 import TopNavbar from "./molecules/TopNavbar";
 import HomePage from "./Polymers/HomePage";
@@ -19,7 +18,7 @@ const App = () => {
         <Route exact path="/View">
           <ViewPage />
         </Route>
-        <Route exact path="/Add">
+        <Route exact path="/Add"> 
           <PostForm />
         </Route>
         <Route exact path="/Signup">

@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {
   Collapse,
   Nav,
@@ -11,13 +11,18 @@ import {
   NavItem,
   NavLink,
 } from "reactstrap";
+import { AUTH_TOKEN } from "../../utils/constants";
 
 const TopNavbar = () => {
   const [isOpen, setIsOpen] = useState<undefined | boolean>(false);
-
   const toggle = () => setIsOpen(!isOpen);
 
+  const [authToken, setauthToken] = useState(localStorage.getItem(AUTH_TOKEN));
+
+  const history = useHistory();
+
   return (
+    
     <div>
       <Navbar color="warning" light expand="md">
         <Link to="/">
@@ -37,16 +42,30 @@ const TopNavbar = () => {
               </Link>
             </NavItem>
           </Nav>
-          <NavbarText>
-            <Link to="/Login">
-              <NavLink>Login</NavLink>
-            </Link>
-          </NavbarText>
-          <NavbarText>
-            <Link to="/Signup">
-              <NavLink>Sign up</NavLink>
-            </Link>
-          </NavbarText>
+          {!authToken ? (
+            <>
+              <NavbarText>
+                <Link to="/Login">
+                  <NavLink>Login</NavLink>
+                </Link>
+              </NavbarText>
+              <NavbarText>
+                <Link to="/Signup">
+                  <NavLink>Sign up</NavLink>
+                </Link>
+              </NavbarText>
+            </>
+          ) : (
+            <NavbarText
+              id="logout"
+              onClick={() => {
+                localStorage.removeItem(AUTH_TOKEN);
+                history.push(`/`);
+              }}
+            >
+              <NavLink>Logout</NavLink>
+            </NavbarText>
+          )}
         </Collapse>
       </Navbar>
     </div>

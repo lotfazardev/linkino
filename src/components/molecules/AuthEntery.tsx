@@ -1,7 +1,11 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useMutation } from "react-apollo";
+import { Link, useHistory } from "react-router-dom";
 import { Button } from "reactstrap";
 import { Form, FormGroup, Input, Label } from "reactstrap";
+import { SIGNUP_MUTATION } from "../../graphql/mutation";
+import { AUTH_TOKEN } from "../../utils/constants";
+import ErrorBox from "../atoms/ErrorBox";
 
 interface AuthEnteryProps {
   isLogin: boolean;
@@ -13,8 +17,47 @@ const AuthEntery: React.FC<AuthEnteryProps> = ({ isLogin }) => {
     password: "",
     name: "",
   });
+
+  const [IsStart, setIsStart] = useState<boolean>(false);
+
+  const history = useHistory();
+
+  const saveUserData = (userToken: string) => {
+    localStorage.setItem(AUTH_TOKEN, userToken);
+  };
+
+  const [Signup, SignupResult] = useMutation(SIGNUP_MUTATION, {
+    variables: {
+      name: State.name,
+      email: State.password,
+      password: State.password,
+    },
+  });
+
+  const handelClick = () => {
+    if (isLogin) {
+      // login mutation function here
+    } else {
+      Signup().catch((err) => {
+        console.log(err);
+      });
+    }
+  };
+
+  useEffect(() => {
+    if(IsStart){
+      saveUserData(SignupResult.data?.signup);
+      history.push("/")
+    }else{
+      setIsStart(true)
+    }
+  }, [SignupResult.data]);
+
   return (
     <Form className="p-3 p-md-5">
+      {SignupResult.error ? (
+        <ErrorBox errorText={SignupResult.error.message} />
+      ) : null}
       <h4>{isLogin ? "Login" : "Sign Up"}</h4>
       <div className="pt-4">
         {!isLogin ? (
@@ -52,9 +95,13 @@ const AuthEntery: React.FC<AuthEnteryProps> = ({ isLogin }) => {
       </div>
       <div>
         {isLogin ? (
-          <Button color="primary">Login</Button>
+          <Button onClick={handelClick} color="primary">
+            Login
+          </Button>
         ) : (
-          <Button color="primary">SignUp</Button>
+          <Button onClick={handelClick} color="primary">
+            SignUp
+          </Button>
         )}
         <div className="mt-3">
           {isLogin ? (
