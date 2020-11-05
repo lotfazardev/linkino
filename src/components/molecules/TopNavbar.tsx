@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import {
@@ -12,17 +12,17 @@ import {
   NavLink,
 } from "reactstrap";
 import { AUTH_TOKEN } from "../../utils/constants";
+import { TokenContext } from "../../utils/TokenContext";
 
 const TopNavbar = () => {
   const [isOpen, setIsOpen] = useState<undefined | boolean>(false);
   const toggle = () => setIsOpen(!isOpen);
 
-  const [authToken, setauthToken] = useState(localStorage.getItem(AUTH_TOKEN));
+  const { UserToken, setUserToken } = useContext(TokenContext);
 
   const history = useHistory();
 
   return (
-    
     <div>
       <Navbar color="warning" light expand="md">
         <Link to="/">
@@ -42,7 +42,7 @@ const TopNavbar = () => {
               </Link>
             </NavItem>
           </Nav>
-          {!authToken ? (
+          {!UserToken ? (
             <>
               <NavbarText>
                 <Link to="/Login">
@@ -60,6 +60,7 @@ const TopNavbar = () => {
               id="logout"
               onClick={() => {
                 localStorage.removeItem(AUTH_TOKEN);
+                setUserToken("")
                 history.push(`/`);
               }}
             >
