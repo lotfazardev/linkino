@@ -5,6 +5,7 @@ import { Button } from "reactstrap";
 import { Form, FormGroup, Input, Label } from "reactstrap";
 import { Interface } from "readline";
 import { SIGNUP_MUTATION } from "../../graphql/mutation";
+import { LOGIN_MUTATION } from "../../graphql/mutation/loginMutaion";
 import { AUTH_TOKEN } from "../../utils/constants";
 import { TokenContext } from "../../utils/TokenContext";
 import ErrorBox from "../atoms/ErrorBox";
@@ -43,9 +44,18 @@ const AuthEntery: React.FC<AuthEnteryProps> = ({ isLogin }) => {
     },
   });
 
+  const [Login, LoginResult] = useMutation(LOGIN_MUTATION, {
+    variables: {
+      email: State.password,
+      password: State.password,
+    },
+  });
+
   const handelClick = () => {
     if (isLogin) {
-      // login mutation function here
+      Login().catch((err) => {
+        console.log(err);
+      });
     } else {
       Signup().catch((err) => {
         console.log(err);
@@ -62,12 +72,25 @@ const AuthEntery: React.FC<AuthEnteryProps> = ({ isLogin }) => {
     }
   }, [SignupResult.data]);
 
+  useEffect(() => {
+    if (IsStart) {
+      saveUserData(LoginResult.data?.login);
+      history.push("/");
+    } else {
+      setIsStart(true);
+    }
+  }, [LoginResult.data]);
+
+
   return (
     <>
       {!UserToken ? (
         <Form className="p-3 p-md-5">
           {SignupResult.error ? (
             <ErrorBox errorText={SignupResult.error.message} />
+          ) : null}
+          {LoginResult.error ? (
+            <ErrorBox errorText={LoginResult.error.message} />
           ) : null}
           <h4>{isLogin ? "Login" : "Sign Up"}</h4>
           <div className="pt-4">
